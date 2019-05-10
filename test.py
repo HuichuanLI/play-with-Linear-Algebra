@@ -19,6 +19,9 @@ print("{}".format(zero3))
 print("norm({}) = {}".format(u,u.norm()))
 print("normzlize({}) = {}".format(u,u / 3))
 
+print("{}*{} = {}".format(u,u2,u.dot(u2)))
+
+print(u[1:])
 try:
     zero3.normalize()
 except ZeroDivisionError:

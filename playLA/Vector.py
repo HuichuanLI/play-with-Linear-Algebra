@@ -2,6 +2,7 @@
 import math
 from ._global import EPSILON
 
+
 class Vector:
 
     def __init__(self, lst):
@@ -57,3 +58,7 @@ class Vector:
 
     def __neg__(self):
         return -1 * self
+
+    def dot(self, another):
+        assert len(another) == len(self), "the dimension should be same"
+        return sum(a * b for a, b in zip(self, another))
