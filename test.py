@@ -14,3 +14,12 @@ print("-{} = {}".format(u,-u))
 zero3 = Vector.zero(3)
 
 print("{}".format(zero3))
+
+
+print("norm({}) = {}".format(u,u.norm()))
+print("normzlize({}) = {}".format(u,u / 3))
+
+try:
+    zero3.normalize()
+except ZeroDivisionError:
+    print("Cannot normalize zero vector{}".format(zero3))

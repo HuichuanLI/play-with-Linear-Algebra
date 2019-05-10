@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import math
+from ._global import EPSILON
 
 class Vector:
 
@@ -9,6 +11,14 @@ class Vector:
     def zero(cls, dim):
         """零向量"""
         return cls([0] * dim)
+
+    def norm(self):
+        return math.sqrt(sum(e ** 2 for e in self))
+
+    def normalize(self):
+        if self.norm() < EPSILON:
+            raise ZeroDivisionError("there is error")
+        return Vector(self._values) / self.norm()
 
     def __add__(self, another):
         assert len(another) == len(self), " Error in adding. Length must be same"
@@ -38,6 +48,9 @@ class Vector:
 
     def __rmul__(self, k):
         return self * k
+
+    def __truediv__(self, k):
+        return (1 / k) * self
 
     def __pos__(self):
         return 1 * self
