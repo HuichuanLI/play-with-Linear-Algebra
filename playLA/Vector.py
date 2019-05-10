@@ -1,7 +1,14 @@
+# -*- coding: utf-8 -*-
+
 class Vector:
 
     def __init__(self, lst):
         self._values = list(lst)
+
+    @classmethod
+    def zero(cls, dim):
+        """零向量"""
+        return cls([0] * dim)
 
     def __add__(self, another):
         assert len(another) == len(self), " Error in adding. Length must be same"
@@ -25,3 +32,15 @@ class Vector:
 
     def __str__(self):
         return "({})".format(",".join(str(e) for e in self._values))
+
+    def __mul__(self, k):
+        return Vector([k * e for e in self])
+
+    def __rmul__(self, k):
+        return self * k
+
+    def __pos__(self):
+        return 1 * self
+
+    def __neg__(self):
+        return -1 * self
