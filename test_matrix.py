@@ -17,4 +17,10 @@ if __name__ == "__main__":
 
     print(matrix.col_vector(1))
 
-    print(Matrix.zero(2,3))
+    print(matrix.dot(matrix1))
+
+    print("{}.t = {}".format(matrix1,matrix1.T()))
+
+    print("{}".format(matrix[1,1]))
+
+

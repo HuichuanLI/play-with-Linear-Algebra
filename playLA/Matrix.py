@@ -57,9 +57,21 @@ class Matrix:
     def __neg__(self):
         return (-1) * self
 
+    def T(self):
+        return Matrix([[e for e in self.col_vector(i)] for i in range(self.col_number())])
+
     @classmethod
     def zero(cls, r, c):
         return cls([[0] * c for _ in range(r)])
+
+    def dot(self, another):
+        if isinstance(another, Vector):
+            assert self.col_number() == len(another), "error"
+            return Vector([self.row_vector(i).dot(another) for i in range(self.row_vector())])
+        if isinstance(another, Matrix):
+            assert self.col_number() == another.row_number(), "error"
+            return Matrix([[self.row_vector(i).dot(another.col_vector(j)) for j in range(self.col_number())] for i in
+                           range(self.row_number())])
 
     __str__ = __repr__
     __len__ = row_number
