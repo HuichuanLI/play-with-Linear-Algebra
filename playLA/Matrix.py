@@ -73,5 +73,12 @@ class Matrix:
             return Matrix([[self.row_vector(i).dot(another.col_vector(j)) for j in range(self.col_number())] for i in
                            range(self.row_number())])
 
+    @classmethod
+    def identity(cls,n):
+        m = [[0]*n for _ in range(n)]
+        for i in range(n):
+            m[i][i] = 1
+        return cls(m)
+
     __str__ = __repr__
     __len__ = row_number

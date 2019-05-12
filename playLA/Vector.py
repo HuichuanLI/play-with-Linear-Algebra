@@ -21,6 +21,9 @@ class Vector:
             raise ZeroDivisionError("there is error")
         return Vector(self._values) / self.norm()
 
+    def underlying_list(self):
+        return self._values[:]
+
     def __add__(self, another):
         assert len(another) == len(self), " Error in adding. Length must be same"
         return Vector([a + b for a, b, in zip(self, another)])
@@ -51,6 +54,7 @@ class Vector:
         return self * k
 
     def __truediv__(self, k):
+        """返回数量除法的结果向量：self / k"""
         return (1 / k) * self
 
     def __pos__(self):

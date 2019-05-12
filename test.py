@@ -28,3 +28,4 @@ except ZeroDivisionError:
     print("Cannot normalize zero vector{}".format(zero3))
 
 
+

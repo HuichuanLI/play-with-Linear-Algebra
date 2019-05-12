@@ -24,3 +24,6 @@ if __name__ == "__main__":
     print("{}".format(matrix[1,1]))
 
 
+    print("{}".format(Matrix.identity(3)))
+
+
