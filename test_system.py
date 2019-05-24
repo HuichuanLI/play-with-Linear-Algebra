@@ -78,3 +78,5 @@ if __name__ == "__main__":
     print(inv(A))
 
     print("{}*{} = {}".format(A,inv(A),A.dot(inv(A))))
+
+
