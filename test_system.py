@@ -79,4 +79,10 @@ if __name__ == "__main__":
 
     print("{}*{} = {}".format(A,inv(A),A.dot(inv(A))))
 
+    print(rank(A8))
+    print(rank(A7))
+
+    print("base{} = {}".format(A8,base_row(A8)))
+    print("base{}={}".format(A8,base_column(A8)))
+
 

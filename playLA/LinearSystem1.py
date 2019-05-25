@@ -5,12 +5,16 @@ from .Matrix import Matrix
 
 class LinearSystem1:
 
-    def __init__(self, A, b):
-        assert A.row_number() == len(b), "row number of A must be equal to the length of b"
+    def __init__(self, A, b=None):
+        assert b is None or A.row_number() == len(b), "row number of A must be equal to the length of b"
         self._m = A.row_number()
         self._n = A.col_number()
+        if b is None:
+            self.Ab = [A.row_vector(i) for i in range(self._m)]
+
         if (isinstance(b, Vector)):
-            self.Ab = [Vector(A.row_vesctor(i).underlying_list() + [b[i]]) for i in range(self._m)]
+            self.Ab = [Vector(A.row_vector(i).underlying_list() + [b[i]]) for i in range(self._m)]
+
         if (isinstance(b, Matrix)):
             self.Ab = [Vector(A.row_vector(i).underlying_list() + b.row_vector(i).underlying_list()) for i in
                        range(self._m)]
@@ -75,3 +79,46 @@ def inv(A):
 
     invA = [[row[i] for i in range(n, 2 * n)] for row in ls.Ab]
     return Matrix(invA)
+
+
+def rank(A):
+    ls = LinearSystem1(A)
+    ls.gauss_jordan_elimination()
+    zero = Vector.zero(A.col_number())
+
+    return sum([row != zero for row in ls.Ab])
+
+
+def base_row(A):
+    ls = LinearSystem1(A)
+    ls.gauss_jordan_elimination()
+    zero = Vector.zero(A.col_number())
+    res = []
+    for row in ls.Ab:
+        if row != zero:
+            res.append(row)
+        else:
+            break
+    return res
+
+
+def base_column(A):
+    ls = LinearSystem1(A)
+    ls.gauss_jordan_elimination()
+
+    rank = []
+
+    row_postion = 0
+    for row in ls.Ab:
+        index = row_postion
+        while index< A.col_number() and row.underlying_list()[index] == 0:
+           index += 1
+
+        if index == A.col_number():
+            break
+        if row.underlying_list()[index] == 1:
+            row_postion = index
+            rank.append(index)
+
+
+    return [A.col_vector(col) for col in rank]

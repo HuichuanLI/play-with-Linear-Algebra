@@ -4,7 +4,10 @@ from .Vector import Vector
 class Matrix:
 
     def __init__(self, list2d):
-        self._values = [row[:] for row in list2d]
+        if isinstance(list2d[0], list):
+            self._values = [row[:] for row in list2d]
+        elif isinstance(list2d[0], Vector):
+            self._values = [row.underlying_list() for row in list2d]
 
     def row_vector(self, index):
         return Vector(self._values[index])
@@ -74,8 +77,8 @@ class Matrix:
                            range(self.row_number())])
 
     @classmethod
-    def identity(cls,n):
-        m = [[0]*n for _ in range(n)]
+    def identity(cls, n):
+        m = [[0] * n for _ in range(n)]
         for i in range(n):
             m[i][i] = 1
         return cls(m)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 from ._global import EPSILON
+from ._global import is_equal
 
 
 class Vector:
@@ -62,6 +63,16 @@ class Vector:
 
     def __neg__(self):
         return -1 * self
+
+    def __eq__(self, other):
+        other_list = other.underlying_list()
+
+        if len(other_list) != len(self._values):
+            return False
+        return all(is_equal(x,y) for x,y in zip(self._values,other_list))
+
+    def __neq__(self,other):
+        return not(self == other)
 
     def dot(self, another):
         assert len(another) == len(self), "the dimension should be same"
